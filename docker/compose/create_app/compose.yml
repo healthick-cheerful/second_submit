@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  react:
+    container_name: react
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/create_app/Dockerfile
+    volumes: 
+      - ./react:/var/react_app

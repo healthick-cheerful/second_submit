@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  react:
+    container_name: react
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/dev_react/Dockerfile
+    volumes: 
+      - ./react:/var/react_app
+    ports:
+      - 3000:3000
