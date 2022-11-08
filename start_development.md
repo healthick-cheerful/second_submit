@@ -4,7 +4,7 @@
     1. `mkdir react`
     1. `cp ./compose/create_app/compose.yml ./`
     1. `docker compose build`
-    1. `docker compose run --rm react sh -c "cd /var && npx create-react-app react_app --template typescript"`
+    1. `docker compose run --rm react sh -c "cd /var && npx create-react-app react_app"`
 
 # App作成後の開発
 1. dockerディレクトリに移動する
