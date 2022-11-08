@@ -6,10 +6,10 @@
     1. `docker compose build`
     1. `docker compose run --rm react sh -c "cd /var && npx create-react-app react_app && cd /var/react_app && npm install react-bootstrap bootstrap && npm install axios"`
 
-# App作成後の開発
+# App作成後の開発(reactのみ)
 1. dockerディレクトリに移動する
 1. 以下のコマンドを実行する
-    1. `chmod +x development.sh`
+    1. `chmod +x dev_react.sh`
     1. `cp ./compose/dev_react/compose.yml ./`
     1. `docker compose build`
     1. `docker compose up`

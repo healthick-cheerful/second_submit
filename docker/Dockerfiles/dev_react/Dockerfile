@@ -1,4 +1,4 @@
 FROM node:18.8.0-bullseye-slim
 WORKDIR /var
-ADD development.sh /var/
-ENTRYPOINT ["./development.sh"]
+ADD dev_react.sh /var/
+ENTRYPOINT ["./dev_react.sh"]
