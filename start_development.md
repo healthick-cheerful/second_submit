@@ -10,6 +10,6 @@
 1. dockerディレクトリに移動する
 1. 以下のコマンドを実行する
     1. `chmod +x development.sh`
-    1. `cp ./compose/dev_app/compose.yml ./`
+    1. `cp ./compose/dev_react/compose.yml ./`
     1. `docker compose build`
     1. `docker compose up`
