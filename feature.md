@@ -11,7 +11,7 @@
 # 努力事項
 - Reactの採用
 # 採用ミドルウェア
-- React
-- Bootstrap(React Bootstrap)
+- react
+- axios
 - php-fpm
 - nginx
