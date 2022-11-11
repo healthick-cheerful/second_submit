@@ -1,5 +1,5 @@
 # インストール手順
-
+1. ストレージ16Gibで作成
 1. http/httpsのポートを開放しておく
 1. サーバーでキーペアを作成
     - `ssh-keygen -b 4096`
@@ -12,12 +12,23 @@
     - `git clone git@github.com:healthick-cheerful/second_submit.git`
 1. クローンしたリポジトリ内部のインストーラー等に実行権限を付与する
     - `chmod +x ./second_submit/installer.sh`
-    - `chmod +x ./second_submit/run_app.sh`
 1. インストーラーを実行し、シェルを再起動する
     - `./second_submit/installer.sh`
-1. dockerディレクトリまで移動し、以下のコマンドを入力する
-    - `cd ./second_submit/docker`
-    - `./run_app.sh`
+
+# reactのビルド
+1. dockerディレクトリに移動する
+1. 以下のコマンドを実行する
+    1. `chmod +x build_react.sh`
+    1. `cp ./compose/build_react/compose.yml ./`
+    1. `docker compose build`
+    1. `docker compose up`
+
+# アプリの実行
+1. dockerディレクトリに移動する
+1. 以下のコマンドを実行する
+    1. `cp ./compose/run_app/compose.yml ./`
+    1. `docker compose build`
+    1. `docker compose up --remove-orphans`
 
 # MySQLの設定
 1. 以下のコマンドを入力し、MySQLコンテナ内に入る
