@@ -3,7 +3,7 @@ import axios from "axios"
 import MainPage from "./MainPage"
 import LoginModal from "./LoginModal"
 
-class Top extends React.Component {
+class Wrapper extends React.Component {
     GetUserInfo() {
         axios.post("./user_info.php")
         .then((response) => {
@@ -24,4 +24,4 @@ class Top extends React.Component {
     }
 }
 
-export default Top
+export default Wrapper
