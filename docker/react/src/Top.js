@@ -15,11 +15,12 @@ class Top extends React.Component {
     }
     render() {
         let userInfo = this.GetUserInfo()
-        if(userInfo) {
-            return <MainPage userName={ userInfo.name } iconPath={ userInfo.icon_path }/>
-        } else {
-            return <LoginModal />
-        }
+        // if(userInfo) {
+        //     return <MainPage userName={ userInfo.name } iconPath={ userInfo.icon_path }/>
+        // } else {
+        //     return <LoginModal />
+        // }
+        return <MainPage />
     }
 }
 

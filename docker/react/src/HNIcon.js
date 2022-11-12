@@ -1,5 +1,5 @@
 import React from "react"
-import './HNIcon.css'
+import './css/HNIcon.css'
 
 class HNIcon extends React.Component {
     render() {

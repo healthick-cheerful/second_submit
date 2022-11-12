@@ -1,5 +1,5 @@
 import React from "react"
-import './HNElement.css'
+import './css/HNElement.css'
 
 class HNElement extends React.Component {
     render() {
