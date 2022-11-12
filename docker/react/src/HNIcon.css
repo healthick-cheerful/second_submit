@@ -1,0 +1,10 @@
+div.hn-element {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
