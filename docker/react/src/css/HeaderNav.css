@@ -1,0 +1,6 @@
+div.header-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: grey;
+    height: 10vh;
+}
