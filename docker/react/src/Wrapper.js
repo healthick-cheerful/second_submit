@@ -21,9 +21,8 @@ class Wrapper extends React.Component {
             return false
         })
     }
-    handleSignupChange(signup) {
-        this.setState({signup})
-        console.log(this.state.signup)
+    handleSignupChange(value) {
+        this.setState({signup: value})
     }
     render() {
         const userInfo = this.GetUserInfo()
