@@ -39,6 +39,7 @@ div.content {
 }
 
 .content input {
+    width: 75%;
     text-align: center;
     font-family: M_PLUS_Rounded_1c_regular;
 }
