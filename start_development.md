@@ -20,7 +20,14 @@
     1. `chmod +x build_react.sh`
     1. `cp ./compose/build_react/compose.yml ./`
     1. `docker compose build`
-    1. `docker compose up --remove-orphans`
+    1. `docker compose up`
+
+# アプリケーションの開発を行う(reactのビルド + バックエンドの開発環境の構築)
+1. dockerディレクトリに移動する
+1. 以下のコマンドを実行する
+    1. `cp ./compose/dev_app/compose.yml ./`
+    1. `docker compose build`
+    1. `docker compose up`
 
 # アプリケーションの実行
 1. dockerディレクトリに移動する
