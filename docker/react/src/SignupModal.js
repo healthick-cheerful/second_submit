@@ -31,7 +31,7 @@ class SignupModal extends React.Component {
         params.append('name', this.state.name)
         params.append('email', this.state.email)
         params.append('password', this.state.password)
-        axios.post('./public/signup.php', params)
+        axios.post('./signup.php', params)
         .then((response) => {
             console.log(response)
         }).catch((error) => {
