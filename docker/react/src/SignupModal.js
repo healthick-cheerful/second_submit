@@ -1,6 +1,8 @@
 import React from "react"
 import axios from "axios"
 
+import "./css/SignupModal.css"
+
 class SignupModal extends React.Component {
     constructor(props) {
         super(props)
@@ -42,13 +44,18 @@ class SignupModal extends React.Component {
     render() {
         return (
             <div className="signup-modal">
-                <form onSubmit={ this.handleSubmit }>
-                    <input type="text" name="name" value={ this.state.name } onChange={ this.handleInputChange } />
-                    <input type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange } />
-                    <input type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange } />
-                    <button type="submit">Confirm</button>
-                </form>
-                <button onClick={ this.handleSignup }>Login</button>
+                <div className="overlay">
+                    <div className="content">
+                        <h1>Signup</h1>
+                        <form onSubmit={ this.handleSubmit }>
+                            <label htmlFor="name">name</label><br></br><input type="text" name="name" value={ this.state.name } onChange={ this.handleInputChange } /><br></br>
+                            <label htmlFor="email">email</label><br></br><input type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange } /><br></br>
+                            <label htmlFor="password">password</label><br></br><input type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange } /><br></br>
+                            <button className="confirm" type="submit">Confirm</button>
+                        </form>
+                        <button className="login" onClick={ this.handleSignup }>Login</button>
+                    </div>
+                </div>
             </div>
         )
     }
