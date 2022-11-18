@@ -7,7 +7,7 @@ services:
       - 80:80
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d/
-      - ./php/:/var/www/public/php/
+      - ./php/:/var/www/php/
       - image:/var/www/upload/image/
       - ./react/build/:/var/www/public/build/
     depends_on:
@@ -27,7 +27,7 @@ services:
       dockerfile: ./Dockerfiles/run_php/Dockerfile
       target: php
     volumes:
-      - ./php/:/var/www/public/php/
+      - ./php/:/var/www/php/
       - image:/var/www/upload/image/
   mysql:
     container_name: mysql
