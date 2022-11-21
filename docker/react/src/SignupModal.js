@@ -43,7 +43,7 @@ class SignupModal extends React.Component {
     }
     render() {
         return (
-            <div className="signup-modal">
+            <div className="signup-modal modal">
                 <div className="overlay">
                     <div className="content">
                         <h1>Signup</h1>

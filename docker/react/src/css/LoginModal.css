@@ -1,9 +1,11 @@
+/* 要修正 */
+
 @font-face {
     font-family: M_PLUS_Rounded_1c_regular;
     src: url("../fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Regular.ttf");
 }
 
-.signup-modal div.overlay {
+.login-modal div.overlay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,37 +17,43 @@
     background-color: rgba(0,0,0,0.5);
 }
 
-.signup-modal div.content {
+.login-modal div.content {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding: 2.5% 0 2.5%;
+    padding: 0.9rem 0 0.9rem;
     text-align: center;
     font-family: M_PLUS_Rounded_1c_regular;
     width: 50%;
     background-color: white;
 }
 
-.signup-modal .content h1 {
+.login-modal .content h1 {
     padding: 0;
-    margin: 0 0 2%;
+    margin: 0 0 1.5rem;
     font-size: 1.5rem;
     font-family: M_PLUS_Rounded_1c_regular;
 }
 
-.signup-modal .content label {
-    margin: 0.8% 0 0;
+.login-modal .content label {
+    display: block;
+    margin: 0.8rem 0 0;
     font-size: 1rem;
 }
 
-.signup-modal .content input {
+.login-modal .content label:nth-of-type(odd) {
+    margin: 0;
+}
+
+.login-modal .content input {
+    padding: 0;
+    margin: 0;
     width: 75%;
     text-align: center;
     font-family: M_PLUS_Rounded_1c_regular;
 }
 
-.signup-modal .content button{
-    margin: 0.8% 0 0;
+.login-modal .content button{
     font-size: 1rem;
     font-family: M_PLUS_Rounded_1c_regular;
     background-color: transparent;
@@ -56,15 +64,15 @@
     appearance: none;
 }
 
-.signup-modal form {
+.login-modal form {
     border-bottom: 1px black solid;
     width: 80%;
 }
 
-.signup-modal button.confirm {
-    margin: 0.8% 0 2%;
+.login-modal button.confirm {
+    margin: 0.8rem 0 1.6rem;
 }
 
-.signup-modal button.login {
-    margin: 2% 0 0;
+.login-modal button.login {
+    margin: 1.6rem 0 0;
 }
