@@ -21,7 +21,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding: 2.5% 0 2.5%;
+    padding: 0.9rem 0 0.9rem;
     text-align: center;
     font-family: M_PLUS_Rounded_1c_regular;
     width: 50%;
@@ -30,24 +30,30 @@
 
 .login-modal .content h1 {
     padding: 0;
-    margin: 0 0 2%;
+    margin: 0 0 1.5rem;
     font-size: 1.5rem;
     font-family: M_PLUS_Rounded_1c_regular;
 }
 
 .login-modal .content label {
-    margin: 0.8% 0 0;
+    display: block;
+    margin: 0.8rem 0 0;
     font-size: 1rem;
 }
 
+.login-modal .content label:nth-of-type(odd) {
+    margin: 0;
+}
+
 .login-modal .content input {
+    padding: 0;
+    margin: 0;
     width: 75%;
     text-align: center;
     font-family: M_PLUS_Rounded_1c_regular;
 }
 
 .login-modal .content button{
-    margin: 0.8% 0 0;
     font-size: 1rem;
     font-family: M_PLUS_Rounded_1c_regular;
     background-color: transparent;
@@ -64,9 +70,9 @@
 }
 
 .login-modal button.confirm {
-    margin: 0.8% 0 2%;
+    margin: 0.8rem 0 1.6rem;
 }
 
 .login-modal button.login {
-    margin: 2% 0 0;
+    margin: 1.6rem 0 0;
 }

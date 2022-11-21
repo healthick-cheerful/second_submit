@@ -46,8 +46,8 @@ class LoginModal extends React.Component {
                     <div className="content">
                         <h1>Login</h1>
                         <form onSubmit={ this.handleSubmit }>
-                            <label htmlFor="email">email</label><br></br><input type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange } /><br></br>
-                            <label htmlFor="password">password</label><br></br><input type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange } /><br></br>
+                            <label htmlFor="email">email</label><input type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange } />
+                            <label htmlFor="password">password</label><input type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange } /><br></br>
                             <button className="confirm" type="submit">Confirm</button>
                         </form>
                         <button className="login" onClick={ this.handleSignup }>Signup</button>
