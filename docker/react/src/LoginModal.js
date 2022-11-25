@@ -47,7 +47,7 @@ class LoginModal extends React.Component {
                 <div className="overlay">
                 {this.state.result.success === false &&
                     <div className="result-message">
-                        <h1 className="error">登録に失敗しました。</h1>
+                        <h1 className="error">ログインに失敗しました。</h1>
                     </div>
                 }
                 {this.state.result.server_error &&
