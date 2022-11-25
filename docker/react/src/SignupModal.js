@@ -43,6 +43,7 @@ class SignupModal extends React.Component {
         })
         event.preventDefault()
     }
+// なにも入力していない場合のエラーメッセージも欲しい
     render() {
         return (
             <div className="signup-modal modal">

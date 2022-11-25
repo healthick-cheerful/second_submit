@@ -34,12 +34,13 @@ class LoginModal extends React.Component {
         params.append('password', this.state.password)
         axios.post('./login.php', params)
         .then((response) => {
-            this.setState({result: response})
+            this.setState({result: response.data})
         }).catch(() => {
             this.setState({result: {server_error: true}})
         })
         event.preventDefault()
     }
+// なにも入力していない場合のエラーメッセージも欲しい
     render() {
         return (
             <div className="login-modal modal">
