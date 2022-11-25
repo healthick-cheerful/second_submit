@@ -8,7 +8,8 @@ class LoginModal extends React.Component {
         super(props)
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            result: {}
         }
         this.handleSignup = this.handleSignup.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -33,9 +34,9 @@ class LoginModal extends React.Component {
         params.append('password', this.state.password)
         axios.post('./login.php', params)
         .then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
+            this.setState({result: response})
+        }).catch(() => {
+            this.setState({result: {server_error: true}})
         })
         event.preventDefault()
     }
@@ -43,6 +44,19 @@ class LoginModal extends React.Component {
         return (
             <div className="login-modal modal">
                 <div className="overlay">
+                    {this.state.result && 
+                        <div className="result-message">
+                            {this.state.result.success &&
+                                <h1 className="success">登録が完了しました。</h1>
+                            }
+                            {this.state.result.exist_email &&
+                                <h1 className="error">既に存在しているメールアドレスです。</h1>
+                            }
+                            {this.state.result.server_error &&
+                                <h1 className="error">サーバーでエラーが発生しています。</h1>
+                            }
+                        </div>
+                    }
                     <div className="content">
                         <h1>Login</h1>
                         <form onSubmit={ this.handleSubmit }>
