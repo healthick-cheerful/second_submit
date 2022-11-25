@@ -48,22 +48,22 @@ class SignupModal extends React.Component {
             <div className="signup-modal modal">
                 <div className="overlay">
                 {this.state.result.success &&
-                    <div className="result-message">
+                    <div className="result-message result-success">
                         <h1 className="success">登録が完了しました。</h1>
                     </div>
                 }
                 {this.state.result.success === false &&
-                    <div className="result-message">
+                    <div className="result-message result-error">
                         <h1 className="error">登録に失敗しました。</h1>
                     </div>
                 }
                 {this.state.result.exist_email &&
-                    <div className="result-message">
+                    <div className="result-message result-error">
                         <h1 className="error">既に存在しているメールアドレスです。</h1>
                     </div>
                 }
                 {this.state.result.server_error &&
-                    <div className="result-message">
+                    <div className="result-message result-error">
                         <h1 className="error">サーバーでエラーが発生しています。</h1>
                     </div>
                 }

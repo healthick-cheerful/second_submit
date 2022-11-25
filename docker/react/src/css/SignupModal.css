@@ -16,6 +16,31 @@
     background-color: rgba(0,0,0,0.5);
 }
 
+.signup-modal div.result-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 0 1.5rem;
+    width: 60%;
+    height: 3rem;
+    border-radius: 1.5rem;
+}
+
+.signup-modal div.result-success {
+    border: 1px solid #006d4d;
+    background-color: #a6cdb6;
+}
+
+.signup-modal div.result-error {
+    border: 1px solid #d7003a;
+    background-color: #f29c97;
+}
+
+.signup-modal div.result-message h1 {
+    font-size: 1rem;
+}
+
 .signup-modal div.content {
     display: flex;
     flex-flow: column nowrap;
