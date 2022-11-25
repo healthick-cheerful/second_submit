@@ -36,28 +36,25 @@ class LoginModal extends React.Component {
         .then((response) => {
             this.setState({result: response.data})
         }).catch(() => {
-            this.setState({result: {server_error: true}})
+            this.setState({result: {success: false}})
         })
         event.preventDefault()
     }
-// なにも入力していない場合のエラーメッセージも欲しい
+
     render() {
         return (
             <div className="login-modal modal">
                 <div className="overlay">
-                    {this.state.result && 
-                        <div className="result-message">
-                            {this.state.result.success &&
-                                <h1 className="success">登録が完了しました。</h1>
-                            }
-                            {this.state.result.exist_email &&
-                                <h1 className="error">既に存在しているメールアドレスです。</h1>
-                            }
-                            {this.state.result.server_error &&
-                                <h1 className="error">サーバーでエラーが発生しています。</h1>
-                            }
-                        </div>
-                    }
+                {this.state.result.success === false &&
+                    <div className="result-message">
+                        <h1 className="error">ログインに失敗しました。</h1>
+                    </div>
+                }
+                {this.state.result.server_error &&
+                    <div className="result-message">
+                        <h1 className="error">サーバーでエラーが発生しています。</h1>
+                    </div>
+                }
                     <div className="content">
                         <h1>Login</h1>
                         <form onSubmit={ this.handleSubmit }>
