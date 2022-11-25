@@ -34,6 +34,9 @@ class LoginModal extends React.Component {
         params.append('password', this.state.password)
         axios.post('./login.php', params)
         .then((response) => {
+            if(response.data.success === true) {
+                this.props.onLoginChange(true)
+            }
             this.setState({result: response.data})
         }).catch(() => {
             this.setState({result: {success: false}})
