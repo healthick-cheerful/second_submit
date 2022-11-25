@@ -36,9 +36,10 @@ class SignupModal extends React.Component {
         params.append('password', this.state.password)
         axios.post('./signup.php', params)
         .then((response) => {
-            this.setState({result: response})
+            this.setState({result: response.data})
         }).catch(() => {
             this.setState({result: {server_error: true}})
+            console.log(this.state.result)
         })
         event.preventDefault()
     }
@@ -46,19 +47,17 @@ class SignupModal extends React.Component {
         return (
             <div className="signup-modal modal">
                 <div className="overlay">
-                    {this.state.result && 
-                        <div className="result-message">
-                            {this.state.result.success &&
-                                <h1 className="success">登録が完了しました。</h1>
-                            }
-                            {this.state.result.exist_email &&
-                                <h1 className="error">既に存在しているメールアドレスです。</h1>
-                            }
-                            {this.state.result.server_error &&
-                                <h1 className="error">サーバーでエラーが発生しています。</h1>
-                            }
-                        </div>
-                    }
+                    <div className="result-message">
+                        {this.state.result.success &&
+                            <h1 className="success">登録が完了しました。</h1>
+                        }
+                        {this.state.result.exist_email &&
+                            <h1 className="error">既に存在しているメールアドレスです。</h1>
+                        }
+                        {this.state.result.server_error &&
+                            <h1 className="error">サーバーでエラーが発生しています。</h1>
+                        }
+                    </div>
                     <div className="content">
                         <h1>Signup</h1>
                         <form onSubmit={ this.handleSubmit }>
