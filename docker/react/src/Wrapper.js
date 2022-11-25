@@ -11,30 +11,21 @@ class Wrapper extends React.Component {
             signup: false
         }
         this.handleSignupChange = this.handleSignupChange.bind(this)
-    }
-    GetUserInfo() {
-        axios.post("./user_info.php")
-        .then((response) => {
-            return response.data
-        })
-        .catch(() => {
-            return false
-        })
+        this.handleLoginChange = this.handleLoginChange.bind(this)
     }
     handleSignupChange(value) {
         this.setState({signup: value})
     }
+    handleLoginChange(value) {
+        this.setState({login: value})
+    }
     render() {
-        const userInfo = this.GetUserInfo()
-        // if(userInfo) {
-        //     return <MainPage userName={ userInfo.name } iconPath={ userInfo.icon_path }/>
-        // } else {
-        //     return <LoginModal />
-        // }
-        if(this.state.signup) {
+        if(this.state.login) {
+            return <MainPage />
+        } else if(this.state.signup) {
             return <SignupModal onSignupChange={ this.handleSignupChange } />
         } else {
-            return <LoginModal onSignupChange={ this.handleSignupChange } />
+            return <LoginModal onSignupChange={ this.handleSignupChange } onLoginChange={ this.handleLoginChange }/>
         }
     }
 }
