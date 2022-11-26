@@ -1,0 +1,13 @@
+div.main-page {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100vh;
+}
+
+.main-page div.main-content {
+    width: 70%;
+}
+
+.main-page div.side-bar {
+    width: 30%;
+}
