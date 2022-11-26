@@ -7,8 +7,10 @@ class MainPage extends React.Component {
     render() {
         return (
             <div className="main-page">
-                <MainContent />
-                <SideBar />
+                <div className="content">
+                    <MainContent />
+                    <SideBar />
+                </div>
             </div>
         )
     }
