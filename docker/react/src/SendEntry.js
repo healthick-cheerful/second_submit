@@ -5,6 +5,7 @@ class SendEntry extends React.Component {
     render() {
         return (
             <div className="send-entry">
+                
             </div>
         )
     }
