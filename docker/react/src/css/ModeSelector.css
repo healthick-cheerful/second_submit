@@ -1,0 +1,14 @@
+div.mode-selector {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+    width: 90%;
+    height: 5rem;
+    border: 1px black solid;
+}
+
+.mode-selector h1.mode-headline {
+    margin-left: 1rem;
+    font-size: 2rem;
+}
