@@ -1,6 +1,6 @@
 # Todo
 1. MainPageの整備
-    1. EntryFormBlockの再設計(textareaの仕様を調整)
+    1. SendEntryの再設計(textareaの仕様に合わせる)
     1. EntryUserBlockとEntryFormBlockのボタン設計
 1. MainPageの通信
     1. MainPage初回ロード時に情報を取得(ライフサイクルメソッドを用いて)
@@ -13,5 +13,6 @@
     1. フロントエンドの実装
     1. バックエンドの実装
 1. SignupModalの再設計(remを使う)
+1. EntryFormBlockの再設計(rowsを使って改行文字を検知するアプローチで)
 1. validate
 1. csrf
