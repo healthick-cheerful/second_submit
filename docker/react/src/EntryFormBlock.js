@@ -7,7 +7,9 @@ class EntryFormBlock extends React.Component {
             <div className="entry-form-block">
                 <form method="post">
                     <div className="text-input">
-                        <textarea></textarea>
+                        <div className="textarea-size">
+                            <textarea></textarea>
+                        </div>
                     </div>
                     <div className="action-bar">
                         <button>Confirm</button>

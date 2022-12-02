@@ -22,6 +22,10 @@ div.entry-form-block {
     overflow: hidden;
     outline: none;
 }
+.entry-form-block div.textarea-size {
+    width: 100%;
+    height: 100%;
+}
 
 .entry-form-block div.action-bar {
     display: flex;
