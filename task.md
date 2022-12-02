@@ -1,6 +1,5 @@
 # Todo
 1. MainPageの整備
-    1. EntryUserBlockの再設計(上部張り付き)
     1. EntryFormBlockの再設計(textareaの仕様を調整)
     1. EntryUserBlockとEntryFormBlockのボタン設計
 1. MainPageの通信
