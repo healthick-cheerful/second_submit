@@ -16,9 +16,6 @@ class EntryUserBlock extends React.Component {
                 <img src={ this.state.entryIcon }></img>
             }
             {!this.state.iconNotNull &&
-                // <svg width="400" height="400" viewBox="0 0 400 400">
-                //     <circle fill="#000000"></circle>
-                // </svg>
                 <img src={defaultIcon} />
             }
             <button className="entry-follow-button">Follow</button>
