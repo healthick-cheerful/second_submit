@@ -20,14 +20,13 @@ class Wrapper extends React.Component {
         this.setState({login: value})
     }
     render() {
-        // if(this.state.login) {
-        //     return <MainPage />
-        // } else if(this.state.signup) {
-        //     return <SignupModal onSignupChange={ this.handleSignupChange } />
-        // } else {
-        //     return <LoginModal onSignupChange={ this.handleSignupChange } onLoginChange={ this.handleLoginChange }/>
-        // }
-        return <MainPage />
+        if(this.state.login) {
+            return <MainPage />
+        } else if(this.state.signup) {
+            return <SignupModal onSignupChange={ this.handleSignupChange } />
+        } else {
+            return <LoginModal onSignupChange={ this.handleSignupChange } onLoginChange={ this.handleLoginChange }/>
+        }
     }
 }
 
