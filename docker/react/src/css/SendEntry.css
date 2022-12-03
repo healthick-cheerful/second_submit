@@ -3,5 +3,5 @@ div.send-entry {
     flex-flow: row nowrap;
     border: 1px solid #000;
     width: 70%;
-    height: 12rem;
+    min-height: 12rem;
 }
