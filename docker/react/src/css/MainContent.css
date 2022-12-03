@@ -1,7 +1,14 @@
 div.main-content {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     background-color: white;
 }
 
-.main-content div.mode-selector{
+.main-content div.mode-selector {
     margin: 3rem 0 0;
+}
+
+.main-content div.send-entry {
+    margin: 2rem 0 0;
 }
