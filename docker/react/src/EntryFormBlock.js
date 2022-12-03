@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios"
 import "./css/EntryFormBlock.css"
 
 class EntryFormBlock extends React.Component {
@@ -6,9 +7,11 @@ class EntryFormBlock extends React.Component {
         super(props)
         this.state = {
             body: "",
-            textareaHeight: {}
+            textareaHeight: {},
+            isUpdate: false
         }
         this.handleBodyChange = this.handleBodyChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleBodyChange(event) {
         const target = event.target
@@ -26,15 +29,30 @@ class EntryFormBlock extends React.Component {
             textareaStyle: height
         })
     }
+    handleSubmit(event) {
+        let params = new URLSearchParams
+        params.append('body', this.state.body)
+        axios.post('./post_entry.php', params)
+        .then((response) => {
+            if(response.data.success === true) {
+                this.setState({
+                    isUpdate: true
+                })
+            }
+        }).catch(() => {
+            
+        })
+        event.preventDefault()
+    }
     render() {
         return (
             <div className="entry-form-block">
-                <form method="post">
+                <form method="post" onSubmit={ this.handleSubmit }>
                     <div className="text-input">
                         <textarea value={ this.state.body } onChange={ this.handleBodyChange } style={ this.state.textareaStyle }></textarea>
                     </div>
                     <div className="action-bar">
-                        <button>Confirm</button>
+                        <button type="submit">Confirm</button>
                     </div>
                 </form>
             </div>

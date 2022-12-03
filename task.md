@@ -1,8 +1,6 @@
 # Todo
-1. MainPageの整備
-    1. SendEntryの再設計(textareaの仕様に合わせる)
-    1. EntryUserBlockとEntryFormBlockのボタン設計
 1. MainPageの通信
+    1. SendEntryから投稿送信(bodyのみ)
     1. MainPage初回ロード時に情報を取得(ライフサイクルメソッドを用いて)
     1. SendEntryから投稿送信(画像を含む)
     1. 画像の自動縮小機能の整備
