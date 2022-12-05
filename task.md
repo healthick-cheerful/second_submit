@@ -1,6 +1,5 @@
 # Todo
 1. MainPageの通信
-    1. SendEntryから投稿送信(bodyのみ)
     1. MainPage初回ロード時に情報を取得(ライフサイクルメソッドを用いて)
     1. SendEntryから投稿送信(画像を含む)
     1. 画像の自動縮小機能の整備
@@ -10,6 +9,7 @@
 1. フォローの実装
     1. フロントエンドの実装
     1. バックエンドの実装
+1. リロードしたらLoginに飛ばされる問題の解決
 1. SignupModalの再設計(remを使う)
 1. EntryFormBlockの再設計(rowsを使って改行文字を検知するアプローチで)
 1. validate

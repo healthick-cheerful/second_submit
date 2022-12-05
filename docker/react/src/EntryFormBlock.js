@@ -33,9 +33,9 @@ class EntryFormBlock extends React.Component {
         params.append('body', this.state.body)
         axios.post('./post_entry.php', params)
         .then((response) => {
-            this.props.onUpdateChange({result: response.data})
+            this.props.onEntryFormBlockChange(response.data)
         }).catch(() => {
-            this.props.onUpdateChange({result: {success: false}})
+            this.props.onEntryFormBlockChange({success: false})
         })
         event.preventDefault()
     }
