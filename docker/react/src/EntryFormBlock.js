@@ -8,7 +8,6 @@ class EntryFormBlock extends React.Component {
         this.state = {
             body: "",
             textareaHeight: {},
-            isUpdate: false
         }
         this.handleBodyChange = this.handleBodyChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,13 +33,9 @@ class EntryFormBlock extends React.Component {
         params.append('body', this.state.body)
         axios.post('./post_entry.php', params)
         .then((response) => {
-            if(response.data.success === true) {
-                this.setState({
-                    isUpdate: true
-                })
-            }
+            this.props.onEntryFormBlockChange(response.data)
         }).catch(() => {
-            
+            this.props.onEntryFormBlockChange({success: false})
         })
         event.preventDefault()
     }

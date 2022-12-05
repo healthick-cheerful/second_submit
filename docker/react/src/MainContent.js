@@ -6,12 +6,12 @@ import "./css/MainContent.css"
 class MainContent extends React.Component {
     constructor(props) {
         super(props)
-        this.handleUpdateChange = this.handleUpdateChange.bind(this)
+        this.handleSendEntryChange = this.handleSendEntryChange.bind(this)
         this.state = {
             isUpdate: false
         }
     }
-    handleUpdateChange(value) {
+    handleSendEntryChange(value) {
         this.setState({
             isUpdate: value
         })
@@ -20,7 +20,7 @@ class MainContent extends React.Component {
         return (
             <div className="main-content">
                 <ModeSelector />
-                <SendEntry onUpdateChange={ this.handleUpdateChange }/>
+                <SendEntry onSendEntryChange={ this.handleSendEntryChange }/>
             </div>
         )
     }
