@@ -7,20 +7,19 @@ class SendEntry extends React.Component {
     constructor(props) {
         super(props)
         this.handleUpdateChange.bind(this)
+        this.handleSendEntry.bind(this)
         this.state = {
             isUpdate: false
         }
     }
     handleUpdateChange(value) {
-        this.setState({
-            isUpdate: value
-        })
+        this.props.onUpdateChange(value)
     }
     render() {
         return (
             <div className="send-entry">
                 <EntryUserBlock />
-                <EntryFormBlock onUpdateChange={ this.handleUpdateChange }/>
+                <EntryFormBlock onUpdateChange={ this.handleUpdateChange } />
             </div>
         )
     }
