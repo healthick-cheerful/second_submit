@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import "./css/EntryFormBlock.css"
+import imagesIcon from "./assets/images.svg"
 
 class EntryFormBlock extends React.Component {
     constructor(props) {
@@ -47,6 +48,10 @@ class EntryFormBlock extends React.Component {
                         <textarea value={ this.state.body } onChange={ this.handleBodyChange } style={ this.state.textareaStyle }></textarea>
                     </div>
                     <div className="action-bar">
+                        <input id="imageInput" name="imageInput" type="file" accept="image/*" />
+                        <label className="add-images" htmlFor="imageInput">
+                            <img className="images-icon" src={ imagesIcon } alt="add-images" />
+                        </label>
                         <button type="submit">Confirm</button>
                     </div>
                 </form>
