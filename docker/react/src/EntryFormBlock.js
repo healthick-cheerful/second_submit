@@ -9,8 +9,10 @@ class EntryFormBlock extends React.Component {
         this.state = {
             body: "",
             textareaHeight: {},
+            images: {}
         }
         this.handleBodyChange = this.handleBodyChange.bind(this)
+        this.handleImageInputChange = this.handleImageInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleBodyChange(event) {
@@ -29,9 +31,31 @@ class EntryFormBlock extends React.Component {
             textareaStyle: height
         })
     }
+    handleImageInputChange(event) {
+        const target = event.target
+        const files = target.files
+        if(files.length > 4) {
+            alert('画像は最大4枚までしか選択できません')
+            return
+        }
+        const base64Images = []
+        for(let i = 0; i < files.length; i++) {
+            const reader = new FileReader()
+            reader.onload = () => {
+                base64Images[i] = reader.result
+            }
+            reader.readAsDataURL(files.item(i))
+        }
+        this.setState({
+            images: base64Images
+        })
+    }
     handleSubmit(event) {
         let params = new URLSearchParams
         params.append('body', this.state.body)
+        if(this.state.base64Images !== []) {
+            params.append('image_base64', this.state.base64Images[0])
+        }
         axios.post('./post_entry.php', params)
         .then((response) => {
             this.props.onEntryFormBlockChange(response.data)
@@ -48,7 +72,8 @@ class EntryFormBlock extends React.Component {
                         <textarea value={ this.state.body } onChange={ this.handleBodyChange } style={ this.state.textareaStyle }></textarea>
                     </div>
                     <div className="action-bar">
-                        <input id="imageInput" name="imageInput" type="file" accept="image/*" />
+                        <input id="imageInput" type="file" accept="image/*" multiple onChange={ this.handleImageInputChange }/>
+                        <canvas className="image-canvas" ref={ this.canvasForShrink }></canvas>
                         <label className="add-images" htmlFor="imageInput">
                             <img className="images-icon" src={ imagesIcon } alt="add-images" />
                         </label>

@@ -44,6 +44,10 @@ div.entry-form-block {
     height: 0;
     opacity: 0;
 }
+
+.entry-form-block canvas.image-canvas {
+    display: none;
+}
 .entry-form-block div.action-bar button {
     font-size: 1.5rem;
     font-family: M_PLUS_Rounded_1c_regular;
