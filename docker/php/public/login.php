@@ -2,8 +2,6 @@
 
 require_once(__DIR__ . '/../libs/init.php');
 
-header('Content-Type: application/json');
-
 $result_array = [
     "success" => false,
     "server_error" => false
@@ -32,6 +30,4 @@ if(!empty($_POST['email']) && !empty($_POST['password'])) {
     // userが空(emailが存在しない)の場合はそのままで大丈夫
 }
 
-$result_json = json_encode($result_array);
-echo $result_json;
-return;
+require_once(__DIR__ . '/../libs/fin.php');
