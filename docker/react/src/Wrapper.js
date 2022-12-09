@@ -27,6 +27,7 @@ class Wrapper extends React.Component {
         } else {
             return <LoginModal onSignupChange={ this.handleSignupChange } onLoginChange={ this.handleLoginChange }/>
         }
+        // return <MainPage />
     }
 }
 
