@@ -53,8 +53,8 @@ class EntryFormBlock extends React.Component {
     handleSubmit(event) {
         let params = new URLSearchParams
         params.append('body', this.state.body)
-        if(this.state.base64Images !== []) {
-            params.append('image_base64', this.state.base64Images[0])
+        if(this.state.images !== []) {
+            params.append('image_base64', this.state.images[0])
         }
         axios.post('./post_entry.php', params)
         .then((response) => {
