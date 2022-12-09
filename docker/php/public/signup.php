@@ -2,8 +2,6 @@
 
 require_once(__DIR__ . '/../libs/init.php');
 
-header('Content-Type: application/json');
-
 $result_array = [
     "success" => false,
     "exist_email" => false,
@@ -45,6 +43,4 @@ if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'
     }
 }
 
-$result_json = json_encode($result_array);
-echo $result_json;
-return;
+require_once(__DIR__ . '/../libs/fin.php');

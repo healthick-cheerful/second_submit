@@ -2,8 +2,6 @@
 
 require_once(__DIR__ . '/../libs/init.php');
 
-header('Content-Type: application/json');
-
 session_start();
 $result_array = [
     "success" => false,
@@ -96,6 +94,4 @@ if(isset($_POST['body']) && $_SESSION['login_user_id']) {
     }
 }
 
-$result_json = json_encode($result_array);
-echo $result_json;
-return;
+require_once(__DIR__ . '/../libs/fin.php');
