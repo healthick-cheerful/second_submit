@@ -1,0 +1,24 @@
+div.get-entry {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-top: 2rem;
+    border-top: 1px solid black;
+    width: 100%;
+}
+
+div.get-entry-block {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 1px solid #000;
+    width: 70%;
+    min-height: 12rem;
+}
+
+div.get-entry-block:first-of-type {
+    margin-top: 2rem;
+}
+
+div.get-entry-block {
+    margin-bottom: 2rem;
+}
