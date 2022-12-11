@@ -2,6 +2,7 @@ div.send-entry {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    width: 100%;
 }
 
 .send-entry div.entry-block {
