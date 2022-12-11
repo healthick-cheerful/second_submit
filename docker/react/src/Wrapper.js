@@ -13,6 +13,16 @@ class Wrapper extends React.Component {
         this.handleSignupChange = this.handleSignupChange.bind(this)
         this.handleLoginChange = this.handleLoginChange.bind(this)
     }
+    componentDidMount() {
+        axios.post('./is_login.php')
+        .then((response) => {
+            this.setState({
+                login: response.data.login
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
     handleSignupChange(value) {
         this.setState({signup: value})
     }
