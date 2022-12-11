@@ -56,7 +56,7 @@ if(isset($_SESSION['login_user_id'])) {
             }
         }
     }
-    $result_array["success"] = $entries_data;
+    $result_array["entries_data"] = $entries_data;
 }
 
 require_once(__DIR__ . '/../libs/fin.php');
