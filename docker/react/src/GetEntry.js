@@ -13,30 +13,14 @@ class GetEntry extends React.Component {
     componentDidMount() {
         axios.post('./get_entries.php')
         .then((response) => {
-            console.log(response)
             this.setState({
                 entries: response.data.entries_data
             })
         }).catch((error) => {
             console.log(error)
         })
-        // this.setState({
-        //     entries: [
-        //         {
-        //             id : 1,
-        //             user_id: 1,
-        //             body: "first\n of\n all\n saturday\n suddenly \n happy\n hello\n",
-        //         },
-        //         {
-        //             id : 2,
-        //             user_id: 2,
-        //             body: "second"
-        //         }
-        //     ]
-        // })
     }
     render() {
-        console.log(this.state.entries)
         const entryList = this.state.entries.map((entry) => {
             if("image_filenames" in entry) {
                 return (

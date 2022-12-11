@@ -20,6 +20,10 @@ div.get-entry-text-block {
     line-height: 1.5;
 }
 
+.get-entry-text-block img {
+    height: 4rem;
+}
+
 .get-entry-text-block div.action-bar {
     display: flex;
     justify-content: left;

@@ -15,6 +15,13 @@ class GetEntryTextBlock extends React.Component {
                 return <GetEntryRow key={index} row={row} end={false}/>
             }
         })
+        let images = false
+        if("imageFilenames" in this.props) {
+            images = this.props.imageFilenames.map((filename) => {
+                const filepath = "./image/" + filename
+                return <img src={filepath} />
+            })
+        }
         return (
             <div className="get-entry-text-block">
                 <div className="text-area">
@@ -22,6 +29,11 @@ class GetEntryTextBlock extends React.Component {
                         {nl2br}
                     </div>
                 </div>
+                {"imageFilenames" in this.props &&
+                    <div className="images-bar">
+                        {images}
+                    </div>
+                }
                 <div className="action-bar">
                     <button>Bookmark</button>
                 </div>
