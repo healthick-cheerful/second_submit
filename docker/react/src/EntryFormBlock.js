@@ -14,6 +14,8 @@ class EntryFormBlock extends React.Component {
         this.handleBodyChange = this.handleBodyChange.bind(this)
         this.handleImageInputChange = this.handleImageInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+
+        this.canvasRef = React.createRef()
     }
     handleBodyChange(event) {
         const target = event.target
@@ -40,9 +42,29 @@ class EntryFormBlock extends React.Component {
         }
         const base64Images = []
         for(let i = 0; i < files.length; i++) {
+            const canvas = this.canvasRef.current
             const reader = new FileReader()
+            const image = new Image()
             reader.onload = () => {
-                base64Images[i] = reader.result
+                image.onload = () => {
+                    const originalWidth = image.naturalWidth
+                    const originalHeight = image.naturalHeight
+                    const maxLength = 800
+                    if(originalWidth <= maxLength && originalWidth <= maxLength) {
+                        canvas.width = originalWidth
+                        canvas.height = originalHeight
+                    } else if(originalWidth >= originalHeight) {
+                        canvas.width = maxLength
+                        canvas.height = maxLength * originalHeight / originalWidth
+                    } else {
+                        canvas.width = maxLength * originalWidth / originalHeight
+                        canvas.height = maxLength
+                    }
+                    const context = canvas.getContext("2d")
+                    context.drawImage(image, 0, 0, canvas.width, canvas.height)
+                    base64Images[i] = canvas.toDataURL()
+                }
+                image.src = reader.result
             }
             reader.readAsDataURL(files.item(i))
         }
@@ -75,7 +97,7 @@ class EntryFormBlock extends React.Component {
                     </div>
                     <div className="action-bar">
                         <input id="imageInput" type="file" accept="image/*" multiple onChange={ this.handleImageInputChange }/>
-                        <canvas className="image-canvas" ref={ this.canvasForShrink }></canvas>
+                        <canvas className="image-canvas" ref={ this.canvasRef }></canvas>
                         <label className="add-images" htmlFor="imageInput">
                             <img className="images-icon" src={ imagesIcon } alt="add-images" />
                         </label>
