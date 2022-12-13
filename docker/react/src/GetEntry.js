@@ -25,8 +25,8 @@ class GetEntry extends React.Component {
             if("image_filenames" in entry) {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock entryId={entry.id} userId={entry.user_id} />
-                        <GetEntryTextBlock entryId={entry.id} userId={entry.user_id} body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
+                        <GetEntryUserBlock userName={entry.user_id} iconFilename={entry.icon_filename} />
+                        <GetEntryTextBlock userId={entry.user_id} body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
                     </div>
                 )
             } else {
