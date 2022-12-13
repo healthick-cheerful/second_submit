@@ -19,6 +19,7 @@ class GetEntryUserBlock extends React.Component {
             {!this.state.iconNotNull &&
                 <img src={defaultIcon} />
             }
+            <h1>{this.props.userName}</h1>
             <button className="entry-follow-button">Follow</button>
 
             </div>

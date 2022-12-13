@@ -13,9 +13,18 @@ if(isset($_SESSION['login_user_id'])) {
         $dbh = Db::getHandle();
         $select_sql = '
             SELECT
-                *
+                bbs_entries.id AS id,
+                bbs_entries.user_id,
+                bbs_entries.body,
+                bbs_entries.created_at,
+                users.name AS user_name,
+                users.icon_filename
             FROM
                 `bbs_entries`
+            INNER JOIN
+                `users`
+            ON
+                bbs_entries.user_id = users.id
             ORDER BY
                 bbs_entries.id
             DESC
