@@ -21,19 +21,20 @@ class GetEntry extends React.Component {
         })
     }
     render() {
+        console.log(this.state.entries)
         const entryList = this.state.entries.map((entry) => {
             if("image_filenames" in entry) {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock userName={entry.user_id} iconFilename={entry.icon_filename} />
-                        <GetEntryTextBlock userId={entry.user_id} body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
+                        <GetEntryUserBlock userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
+                        <GetEntryTextBlock body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
                     </div>
                 )
             } else {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock entryId={entry.id} userId={entry.user_id} />
-                        <GetEntryTextBlock entryId={entry.id} userId={entry.user_id} body={entry.body} createdAt={entry.created_at} />
+                        <GetEntryUserBlock userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
+                        <GetEntryTextBlock body={entry.body} createdAt={entry.created_at} />
                     </div>
                 )
             }

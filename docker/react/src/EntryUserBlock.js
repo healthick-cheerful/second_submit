@@ -18,8 +18,6 @@ class EntryUserBlock extends React.Component {
             {!this.state.iconNotNull &&
                 <img src={defaultIcon} />
             }
-            <button className="entry-follow-button">Follow</button>
-
             </div>
         )
     }
