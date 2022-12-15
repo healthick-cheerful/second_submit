@@ -10,6 +10,33 @@ class GetEntry extends React.Component {
             entries: [],
             mode: this.props.mode
         }
+        this.handleMoreClick = this.handleMoreClick.bind(this)
+    }
+    handleMoreClick() {
+        const lastId = this.state.lastId
+        console.log(lastId)
+        if(lastId !== false) {
+            let accessFile = "./get_entries.php"
+            if(this.props.mode === "follow") {
+                accessFile = "./get_follow_entries.php"
+            } else if(this.props.mode === "bookmark") {
+                accessFile = "get_bookmark_entries.php"
+            }
+            const params = new URLSearchParams
+            params.append('last_id', lastId)
+            axios.post(accessFile, params)
+            .then((response) => {
+                console.log(this.state.entries.concat(response.data.entries_data))
+                console.log(this.state.entries)
+                console.log(response.data.entries_data)
+                this.setState({
+                    entries: this.state.entries.concat(response.data.entries_data),
+                    lastId: response.data.last_id
+                })
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }
     componentDidMount() {
         let accessFile = "./get_entries.php"
@@ -21,14 +48,14 @@ class GetEntry extends React.Component {
         axios.post(accessFile)
         .then((response) => {
             this.setState({
-                entries: response.data.entries_data
+                entries: response.data.entries_data,
+                lastId: response.data.last_id
             })
         }).catch((error) => {
             console.log(error)
         })
     }
     componentDidUpdate() {
-        console.log(this.props.mode)
         if(this.state.mode !== this.props.mode) {
             let accessFile = "./get_entries.php"
             if(this.props.mode === "follow") {
@@ -40,7 +67,8 @@ class GetEntry extends React.Component {
             .then((response) => {
                 this.setState({
                     entries: response.data.entries_data,
-                    mode: this.props.mode
+                    mode: this.props.mode,
+                    lastId: response.data.last_id
                 })
             }).catch((error) => {
                 console.log(error)
@@ -69,6 +97,7 @@ class GetEntry extends React.Component {
         return (
             <div className="get-entry">
                 {entryList}
+                <button className="more" onClick={ this.handleMoreClick }>More</button>
             </div>
         )
     }
