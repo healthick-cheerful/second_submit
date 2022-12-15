@@ -49,6 +49,7 @@ if(isset($_SESSION['login_user_id']) && isset($_POST['entry_id'])) {
             $insert_result = $insert_sth->execute();
             if($insert_result) {
                 $result_array['success'] = true;
+                $result_array['bookmark'] = true;
             }
         } else {
             $delete_sql = '
@@ -65,6 +66,7 @@ if(isset($_SESSION['login_user_id']) && isset($_POST['entry_id'])) {
             $delete_result = $delete_sth->execute();
             if($delete_result) {
                 $result_array['success'] = true;
+                $result_array['bookmark'] = false;
             }
         }
     } catch(\Throwable $e) {
