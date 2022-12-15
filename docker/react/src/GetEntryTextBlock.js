@@ -1,10 +1,23 @@
 import React from "react"
 import GetEntryRow from "./GetEntryRow"
 import "./css/GetEntryTextBlock.css"
+import axios from "axios"
 
 class GetEntryTextBlock extends React.Component {
     constructor(props) {
         super(props)
+        this.handleClick = this.handleClick.bind(this)
+    }
+    handleClick() {
+        const params  = new URLSearchParams
+        params.append('entry_id', this.props.entryId)
+        axios.post('./bookmark.php', params)
+        .then((response) => {
+            console.log(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
     render() {
         const rows = this.props.body.split('\n')
@@ -35,7 +48,7 @@ class GetEntryTextBlock extends React.Component {
                     </div>
                 }
                 <div className="action-bar">
-                    <button>Bookmark</button>
+                    <button onClick={ this.handleClick }>Bookmark</button>
                 </div>
             </div>
         )
