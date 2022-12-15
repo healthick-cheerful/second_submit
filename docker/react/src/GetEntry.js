@@ -11,7 +11,6 @@ class GetEntry extends React.Component {
             mode: this.props.mode
         }
         this.handleMoreClick = this.handleMoreClick.bind(this)
-        this.handleScroll = this.handleScroll.bind(this)
     }
     handleMoreClick() {
         const lastId = this.state.lastId
