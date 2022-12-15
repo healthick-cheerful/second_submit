@@ -78,14 +78,14 @@ class GetEntry extends React.Component {
                 return (
                     <div className="get-entry-block" key={entry.id}>
                         <GetEntryUserBlock userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
-                        <GetEntryTextBlock body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
+                        <GetEntryTextBlock entryId={entry.id} body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
                     </div>
                 )
             } else {
                 return (
                     <div className="get-entry-block" key={entry.id}>
                         <GetEntryUserBlock userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
-                        <GetEntryTextBlock body={entry.body} createdAt={entry.created_at} />
+                        <GetEntryTextBlock entryId={entry.id} body={entry.body} createdAt={entry.created_at} />
                     </div>
                 )
             }
