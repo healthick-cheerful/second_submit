@@ -7,7 +7,8 @@ class GetEntry extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            entries: []
+            entries: [],
+            mode: this.props.mode
         }
     }
     componentDidMount() {
@@ -28,20 +29,23 @@ class GetEntry extends React.Component {
     }
     componentDidUpdate() {
         console.log(this.props.mode)
-        let accessFile = "./get_entries.php"
-        if(this.props.mode === "follow") {
-            accessFile = "./get_follow_entries.php"
-        } else if(this.props.mode === "bookmark") {
-            accessFile = "get_bookmark_entries.php"
-        }
-        axios.post(accessFile)
-        .then((response) => {
-            this.setState({
-                entries: response.data.entries_data
+        if(this.state.mode !== this.props.mode) {
+            let accessFile = "./get_entries.php"
+            if(this.props.mode === "follow") {
+                accessFile = "./get_follow_entries.php"
+            } else if(this.props.mode === "bookmark") {
+                accessFile = "./get_bookmark_entries.php"
+            }
+            axios.post(accessFile)
+            .then((response) => {
+                this.setState({
+                    entries: response.data.entries_data,
+                    mode: this.props.mode
+                })
+            }).catch((error) => {
+                console.log(error)
             })
-        }).catch((error) => {
-            console.log(error)
-        })
+        }
     }
     render() {
         const entryList = this.state.entries.map((entry) => {
