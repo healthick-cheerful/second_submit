@@ -7,11 +7,18 @@ class GetEntry extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            entries: []
+            entries: [],
+            mode: this.props.mode
         }
     }
     componentDidMount() {
-        axios.post('./get_entries.php')
+        let accessFile = "./get_entries.php"
+        if(this.props.mode === "follow") {
+            accessFile = "./get_follow_entries.php"
+        } else if(this.props.mode === "bookmark") {
+            accessFile = "get_bookmark_entries.php"
+        }
+        axios.post(accessFile)
         .then((response) => {
             this.setState({
                 entries: response.data.entries_data
@@ -20,8 +27,27 @@ class GetEntry extends React.Component {
             console.log(error)
         })
     }
+    componentDidUpdate() {
+        console.log(this.props.mode)
+        if(this.state.mode !== this.props.mode) {
+            let accessFile = "./get_entries.php"
+            if(this.props.mode === "follow") {
+                accessFile = "./get_follow_entries.php"
+            } else if(this.props.mode === "bookmark") {
+                accessFile = "./get_bookmark_entries.php"
+            }
+            axios.post(accessFile)
+            .then((response) => {
+                this.setState({
+                    entries: response.data.entries_data,
+                    mode: this.props.mode
+                })
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
+    }
     render() {
-        console.log(this.state.entries)
         const entryList = this.state.entries.map((entry) => {
             if("image_filenames" in entry) {
                 return (
