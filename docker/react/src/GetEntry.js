@@ -11,10 +11,10 @@ class GetEntry extends React.Component {
             mode: this.props.mode
         }
         this.handleMoreClick = this.handleMoreClick.bind(this)
+        this.handleScroll = this.handleScroll.bind(this)
     }
     handleMoreClick() {
         const lastId = this.state.lastId
-        console.log(lastId)
         if(lastId !== false) {
             let accessFile = "./get_entries.php"
             if(this.props.mode === "follow") {
@@ -26,9 +26,6 @@ class GetEntry extends React.Component {
             params.append('last_id', lastId)
             axios.post(accessFile, params)
             .then((response) => {
-                console.log(this.state.entries.concat(response.data.entries_data))
-                console.log(this.state.entries)
-                console.log(response.data.entries_data)
                 this.setState({
                     entries: this.state.entries.concat(response.data.entries_data),
                     lastId: response.data.last_id
@@ -39,6 +36,7 @@ class GetEntry extends React.Component {
         }
     }
     componentDidMount() {
+        // モードチェンジ
         let accessFile = "./get_entries.php"
         if(this.props.mode === "follow") {
             accessFile = "./get_follow_entries.php"
