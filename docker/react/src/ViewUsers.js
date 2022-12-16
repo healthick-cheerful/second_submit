@@ -5,13 +5,16 @@ import UserElement from "./UserElement"
 class ViewUsers extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            userList: []
+        }
     }
     componentDidMount() {
         // ユーザー一覧を取得
         axios.post('./get_user_list.php')
         .then((response) => {
             this.setState({
-                userList: response.data
+                userList: response.data.user_list
             })
         }).catch((error) => {
             console.log(error)
@@ -21,9 +24,15 @@ class ViewUsers extends React.Component {
         // ユーザー一覧を取得
         axios.post('./get_user_list.php')
         .then((response) => {
-            this.setState({
-                userList: response.data
-            })
+            // 無限ループ回避
+            for(let i = 0; i < this.state.userList.length; i++) {
+                if(this.state.userList[i]['follow'] !== response.data.user_list[i]['follow']) {
+                    this.setState({
+                        userList: response.data.user_list
+                    })
+                    break;
+                }
+            }
         }).catch((error) => {
             console.log(error)
         })
