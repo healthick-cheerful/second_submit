@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import UserElement from "./UserElement"
+import "./css/ViewUsers.css"
 
 class ViewUsers extends React.Component {
     constructor(props) {

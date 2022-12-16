@@ -1,9 +1,14 @@
 import React from "react"
 import axios from "axios"
+import "./css/UserElement.css"
+import defaultIcon from "./assets/400x400.png"
 
 class UserElement extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            existsIcon: false
+        }
         this.handleClick = this.handleClick.bind(this)
     }
     handleClick() {
@@ -19,9 +24,14 @@ class UserElement extends React.Component {
     render() {
         return (
             <div className="user-element">
-                <img src={this.props.iconFilename} />
+                {!this.state.existsIcon &&
+                    <img className="icon" src={defaultIcon} />
+                }
+                {this.state.existsIcon &&
+                    <img className="icon" src={this.props.iconFilename} />
+                }
                 <h2 className="user-name">{ this.props.userName }</h2>
-                <button onClick={ this.handleClick }>Follow</button>
+                <button className="follow" onClick={ this.handleClick }>Follow</button>
             </div>
         )
     }
