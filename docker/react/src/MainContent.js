@@ -1,7 +1,8 @@
-import React from "react"
+import React, { Profiler } from "react"
 import ModeSelector from "./ModeSelector"
 import SendEntry from "./SendEntry"
 import GetEntry from "./GetEntry"
+import Profile from "./Profile"
 import "./css/MainContent.css"
 
 class MainContent extends React.Component {
@@ -24,12 +25,25 @@ class MainContent extends React.Component {
             mode: value
         })
     }
+    componentDidUpdate() {
+        // profileがfalseでなければmodeにuserIdを入れる
+        if(this.props.profile !== false) {
+            this.state.mode = "profile"
+        }
+    }
     render() {
         return (
             <div className="main-content">
                 <ModeSelector onModeChange={ this.handleModeChange } />
-                <SendEntry onSendEntryChange={ this.handleSendEntryChange }/>
-                <GetEntry mode={ this.state.mode }/>
+                {this.state.mode !== "profile" &&
+                    <SendEntry onSendEntryChange={ this.handleSendEntryChange }/>
+                }
+                {this.state.mode !== "profile" &&
+                    <GetEntry mode={ this.state.mode }/>
+                }
+                {this.state.mode === "profile" &&
+                    <Profile userId={this.props.profile}/>
+                }
             </div>
         )
     }
