@@ -18,7 +18,7 @@ class UserElement extends React.Component {
         params.append('user_id', this.props.userId)
         axios.post('./follow.php', params)
         .then((response) => {
-            this.props.onFollowChange(response.data.follow)
+            console.log(response)
         }).catch((error) => {
             console.log(error)
         })
