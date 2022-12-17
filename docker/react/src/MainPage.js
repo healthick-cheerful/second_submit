@@ -7,21 +7,27 @@ class MainPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            profile: false
+            mode: "all"
         }
         this.handleProfileClick = this.handleProfileClick.bind(this)
+        this.handleModeChange = this.handleModeChange.bind(this)
     }
     handleProfileClick(value) {
         // profileのリフトアップを補足してリフトダウン
         this.setState({
-            profile: value
+            mode: value
+        })
+    }
+    handleModeChange(value) {
+        this.setState({
+            mode: value
         })
     }
     render() {
         return (
             <div className="main-page">
                 <div className="content">
-                    <MainContent profile={this.state.profile}/>
+                    <MainContent mode={this.state.mode} onModeChange={ this.handleModeChange } />
                     <SideBar onProfileClick={ this.handleProfileClick } />
                 </div>
             </div>

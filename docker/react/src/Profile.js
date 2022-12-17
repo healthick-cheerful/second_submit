@@ -6,15 +6,15 @@ class Profile extends React.Component {
         super(props)
     }
     componentDidMount() {
-        const params = new URLSearchParams
-        params.append('user_id', this.props.userId)
-        axios.post('./profile.php')
-        .then((response) => {
-            console.log(response.data)
-            this.setState({
-                userData: response.data
-            })
-        })
+        // const params = new URLSearchParams
+        // params.append('user_id', this.props.userId)
+        // axios.post('./profile.php')
+        // .then((response) => {
+        //     console.log(response.data)
+        //     this.setState({
+        //         userData: response.data
+        //     })
+        // })
     }
     render() {
         return (

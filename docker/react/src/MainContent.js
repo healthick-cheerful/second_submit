@@ -10,10 +10,10 @@ class MainContent extends React.Component {
         super(props)
         this.state = {
             isUpdate: false,
-            mode: "all"
         }
         this.handleSendEntryChange = this.handleSendEntryChange.bind(this)
         this.handleModeChange = this.handleModeChange.bind(this)
+        this.handleProfileClick = this.handleProfileClick.bind(this)
     }
     handleSendEntryChange(value) {
         this.setState({
@@ -21,14 +21,26 @@ class MainContent extends React.Component {
         })
     }
     handleModeChange(value) {
-        this.setState({
-            mode: value
-        })
+        // modeのリフトアップ
+        this.props.onModeChange(value)
+    }
+    handleProfileClick(value) {
+        // 
+        this.props.onModeChange(value)
     }
     componentDidUpdate() {
-        // profileがfalseでなければmodeにuserIdを入れる
-        if(this.props.profile !== false) {
-            this.state.mode = "profile"
+        if(this.props.mode !== this.state.mode) {
+            if(this.props.mode === "all" || this.props.mode === "follow" || this.props.mode === "bookmark") {
+                this.setState({
+                    mode: this.props.mode,
+                    userId: false
+                })
+            } else if(this.props.mode !== this.state.userId) {
+                this.setState({
+                    mode: "profile",
+                    userId: this.props.mode
+                })
+            }
         }
     }
     render() {
@@ -39,10 +51,10 @@ class MainContent extends React.Component {
                     <SendEntry onSendEntryChange={ this.handleSendEntryChange }/>
                 }
                 {this.state.mode !== "profile" &&
-                    <GetEntry mode={ this.state.mode }/>
+                    <GetEntry onProfileClick={ this.handleProfileClick } mode={ this.state.mode }/>
                 }
                 {this.state.mode === "profile" &&
-                    <Profile userId={this.props.profile}/>
+                    <Profile userId={this.state.userId}/>
                 }
             </div>
         )

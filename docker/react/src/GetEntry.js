@@ -11,8 +11,10 @@ class GetEntry extends React.Component {
             mode: this.props.mode
         }
         this.handleMoreClick = this.handleMoreClick.bind(this)
+        this.handleProfileClick = this.handleProfileClick.bind(this)
     }
     handleMoreClick() {
+        // 投稿をさらに読み込む
         const lastId = this.state.lastId
         if(lastId !== false) {
             let accessFile = "./get_entries.php"
@@ -34,6 +36,10 @@ class GetEntry extends React.Component {
             })
         }
     }
+    handleProfileClick(value) {
+        // profileのリフトアップ
+        this.props.onProfileClick(value)
+    }
     componentDidMount() {
         // モードチェンジ
         let accessFile = "./get_entries.php"
@@ -53,6 +59,7 @@ class GetEntry extends React.Component {
         })
     }
     componentDidUpdate() {
+        // モードが違っていれば通信する
         if(this.state.mode !== this.props.mode) {
             let accessFile = "./get_entries.php"
             if(this.props.mode === "follow") {
@@ -77,14 +84,14 @@ class GetEntry extends React.Component {
             if("image_filenames" in entry) {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
+                        <GetEntryUserBlock onProfileClick={ this.handleProfileClick } userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
                         <GetEntryTextBlock entryId={entry.id} body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
                     </div>
                 )
             } else {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
+                        <GetEntryUserBlock onProfileClick={ this.handleProfileClick } userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
                         <GetEntryTextBlock entryId={entry.id} body={entry.body} createdAt={entry.created_at} />
                     </div>
                 )

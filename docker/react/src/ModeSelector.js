@@ -7,10 +7,10 @@ class ModeSelector extends React.Component {
         this.handleClick = this.handleClick.bind(this)
     }
     handleClick(event) {
+        // modeのリフトアップ
         const target = event.target
         const value = target.value
         this.props.onModeChange(value)
-        event.preventDefault()
     }
     render() {
         return (
