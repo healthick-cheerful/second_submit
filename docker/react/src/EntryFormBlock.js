@@ -93,7 +93,9 @@ class EntryFormBlock extends React.Component {
             <div className="entry-form-block">
                 <form method="post" onSubmit={ this.handleSubmit }>
                     <div className="text-input">
-                        <textarea value={ this.state.body } onChange={ this.handleBodyChange } style={ this.state.textareaStyle }></textarea>
+                        <label className="text-area">
+                            <textarea value={ this.state.body } onChange={ this.handleBodyChange } style={ this.state.textareaStyle }></textarea>
+                        </label>
                     </div>
                     <div className="action-bar">
                         <input id="imageInput" type="file" accept="image/*" multiple onChange={ this.handleImageInputChange }/>
