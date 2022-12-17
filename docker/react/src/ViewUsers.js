@@ -9,6 +9,11 @@ class ViewUsers extends React.Component {
         this.state = {
             userList: []
         }
+        this.handleProfileClick = this.handleProfileClick.bind(this)
+    }
+    handleProfileClick(value) {
+        // Profileのリフトアップ
+        this.props.onProfileClick(value)
     }
     componentDidMount() {
         // ユーザー一覧を取得
@@ -41,7 +46,7 @@ class ViewUsers extends React.Component {
     render() {
         const userList = this.state.userList.map((user) => {
             return (
-                <UserElement key={user.id} userId={user.id} userName={user.name} iconFilename={user.icon_filename}/>
+                <UserElement onProfileClick={ this.handleProfileClick } key={user.id} userId={user.id} userName={user.name} iconFilename={user.icon_filename}/>
             )
         })
         return (

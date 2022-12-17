@@ -6,6 +6,17 @@ div.get-entry-user-block {
     border-right: 1px solid #000;
 }
 
+.get-entry-user-block label {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.get-entry-user-block button.hidden {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
 .get-entry-user-block img {
     width: 90%;
     margin: 1rem auto 0;

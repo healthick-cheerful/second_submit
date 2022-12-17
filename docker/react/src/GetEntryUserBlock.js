@@ -10,8 +10,10 @@ class GetEntryUserBlock extends React.Component {
             iconNotNull: false
         }
         this.handleFollowClick = this.handleFollowClick.bind(this)
+        this.handleProfileClick = this.handleProfileClick.bind(this)
     }
     handleFollowClick() {
+        // フォローまたはその解除
         const params = new URLSearchParams
         params.append('user_id', this.props.userId)
         axios.post('./follow.php', params)
@@ -21,17 +23,25 @@ class GetEntryUserBlock extends React.Component {
             console.log(error)
         })
     }
+    handleProfileClick() {
+        // profileのリフトアップ
+        this.props.onProfileClick(this.props.userId)
+    }
     render() {
 // icon表示機能追加予定
         return (
             <div className="get-entry-user-block">
-            {this.state.iconNotNull &&
-                <img src={ this.state.entryIcon }></img>
-            }
-            {!this.state.iconNotNull &&
-                <img src={defaultIcon} />
-            }
-            <h1>{this.props.userName}</h1>
+                <label>
+                    <button className="hidden" onClick={ this.handleProfileClick }></button>
+                {this.state.iconNotNull &&
+                    <img src={ this.state.entryIcon }></img>
+                }
+                {!this.state.iconNotNull &&
+                    <img src={defaultIcon} />
+                }
+                    <h1>{this.props.userName}</h1>
+                </label>
+
             <button className="entry-follow-button" onClick={ this.handleFollowClick }>Follow</button>
 
             </div>

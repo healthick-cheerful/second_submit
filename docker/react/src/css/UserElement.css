@@ -6,6 +6,18 @@ div.user-element {
     margin-bottom: 2rem;
 }
 
+.user-element label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.user-element button.hidden {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
 .user-element img.icon {
     vertical-align: center;
     width: 3rem;
@@ -16,6 +28,7 @@ div.user-element {
     vertical-align: center;
     text-align: left;
     margin: 0;
+    margin-left: 1rem;
     line-height: 1;
     font-size: 1.5rem;
     font-weight: normal;
