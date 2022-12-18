@@ -11,6 +11,7 @@ $result_array = [
 if(isset($_SESSION['login_user_id'])) {
     try {
         $dbh = Db::getHandle();
+        // last_idがあればその続き、なければ直近のデータを取得
         if(isset($_POST['last_id'])) {
             $select_sql = '
                 SELECT
@@ -95,8 +96,12 @@ if(isset($_SESSION['login_user_id'])) {
         }
         $select_sth->execute();
         $entries_data = $select_sth->fetchAll();
+        // 投稿データがあればデータを取得
         if($entries_data !== []) {
+            // 画像データ
             $left_id = $entries_data[array_key_last($entries_data)]["id"] ?? "";
+            // 送信するlast_idを代入
+            $result_array["last_id"] = $left_id;
             $right_id = $entries_data[array_key_first($entries_data)]["id"] ?? "";
             $select_sql = '
                 SELECT
@@ -115,8 +120,8 @@ if(isset($_SESSION['login_user_id'])) {
             $select_sth->bindValue(':right_id', $right_id);
             $select_sth->execute();
             $images_data = $select_sth->fetchAll();
-            $result_array["last_id"] = $left_id;
         } else {
+            // なければデータはなし
             $images_data = [];
             $result_array["left_id"] = false;
         }
