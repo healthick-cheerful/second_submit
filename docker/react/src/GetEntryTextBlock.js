@@ -6,6 +6,9 @@ import axios from "axios"
 class GetEntryTextBlock extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            bookmark: this.props.bookmark
+        }
         this.handleClick = this.handleClick.bind(this)
     }
     handleClick() {
@@ -14,10 +17,21 @@ class GetEntryTextBlock extends React.Component {
         axios.post('./bookmark.php', params)
         .then((response) => {
             console.log(response.data)
+            if('bookmark' in response.data) {
+                this.props.onBookmarkChange(this.props.entryId)
+            }
         })
         .catch((error) => {
             console.log(error)
         })
+    }
+    componentDidUpdate() {
+        console.log(this.props.bookmark)
+        if(this.props.bookmark !== this.state.bookmark) {
+            this.setState({
+                bookmark: this.props.bookmark
+            })
+        }
     }
     render() {
         const rows = this.props.body.split('\n')
@@ -48,7 +62,12 @@ class GetEntryTextBlock extends React.Component {
                     </div>
                 }
                 <div className="action-bar">
+                {!this.state.bookmark &&
                     <button onClick={ this.handleClick }>Bookmark</button>
+                }
+                {this.state.bookmark &&
+                    <button onClick={ this.handleClick }>Bookmarked</button>
+                }
                 </div>
             </div>
         )

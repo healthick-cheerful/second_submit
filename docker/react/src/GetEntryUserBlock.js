@@ -31,7 +31,6 @@ class GetEntryUserBlock extends React.Component {
         this.props.onProfileClick(this.props.userId)
     }
     componentDidUpdate() {
-        console.log(this.props.follow)
         if(this.props.follow !== this.state.follow) {
             this.setState({
                 follow: this.props.follow

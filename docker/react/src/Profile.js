@@ -33,7 +33,6 @@ class Profile extends React.Component {
         profileParams.append('user_id', this.props.userId)
         axios.post('./profile.php', profileParams)
         .then((response) => {
-            console.log(response.data)
             this.setState({
                 userId: this.props.userId,
                 userData: response.data.user_data
@@ -57,7 +56,6 @@ class Profile extends React.Component {
             params.append('user_id', this.props.userId)
             axios.post('./profile.php', params)
             .then((response) => {
-                console.log(response.data)
                 this.setState({
                     userId: this.props.userId,
                     userData: response.data.user_data
