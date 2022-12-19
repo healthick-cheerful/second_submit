@@ -18,7 +18,11 @@ class UserElement extends React.Component {
         params.append('user_id', this.props.userId)
         axios.post('./follow.php', params)
         .then((response) => {
-            console.log(response)
+            if(response.data.success) {
+                this.setState({
+                    follow: response.data.follow
+                })
+            }
         }).catch((error) => {
             console.log(error)
         })
@@ -27,6 +31,12 @@ class UserElement extends React.Component {
         // Profileを表示する指示をリフトアップ
         const userId = this.props.userId
         this.props.onProfileClick(userId)
+    }
+    componentDidMount() {
+        // followの状態をセット
+        this.setState({
+            follow: this.props.follow
+        })
     }
     render() {
         return (
@@ -41,7 +51,12 @@ class UserElement extends React.Component {
                 }
                     <h2 className="user-name">{ this.props.userName }</h2>
                 </label>
-                <button className="follow" onClick={ this.handleFollowClick }>Follow</button>
+                {this.state.follow &&
+                    <button className="follow" onClick={this.handleFollowClick}>Bye</button>
+                }
+                {!this.state.follow &&
+                    <button className="follow" onClick={this.handleFollowClick}>Follow</button>
+                }
             </div>
         )
     }

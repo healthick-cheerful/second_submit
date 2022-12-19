@@ -7,7 +7,8 @@ class GetEntryUserBlock extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            iconNotNull: false
+            iconNotNull: false,
+            follow: this.props.follow
         }
         this.handleFollowClick = this.handleFollowClick.bind(this)
         this.handleProfileClick = this.handleProfileClick.bind(this)
@@ -18,7 +19,9 @@ class GetEntryUserBlock extends React.Component {
         params.append('user_id', this.props.userId)
         axios.post('./follow.php', params)
         .then((response) => {
-            console.log(response.data)
+            if('follow' in response.data) {
+                this.props.onFollowChange(this.props.userId)
+            }
         }).catch((error) => {
             console.log(error)
         })
@@ -26,6 +29,14 @@ class GetEntryUserBlock extends React.Component {
     handleProfileClick() {
         // profileのリフトアップ
         this.props.onProfileClick(this.props.userId)
+    }
+    componentDidUpdate() {
+        console.log(this.props.follow)
+        if(this.props.follow !== this.state.follow) {
+            this.setState({
+                follow: this.props.follow
+            })
+        }
     }
     render() {
 // icon表示機能追加予定
@@ -41,9 +52,12 @@ class GetEntryUserBlock extends React.Component {
                 }
                     <h1>{this.props.userName}</h1>
                 </label>
-
+        {!this.state.follow &&
             <button className="entry-follow-button" onClick={ this.handleFollowClick }>Follow</button>
-
+        }
+        {this.state.follow &&
+            <button className="entry-follow-button" onClick={ this.handleFollowClick }>Bye</button>
+        }
             </div>
         )
     }

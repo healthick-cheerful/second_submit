@@ -8,10 +8,12 @@ class GetEntry extends React.Component {
         super(props)
         this.state = {
             entries: [],
-            mode: this.props.mode
+            mode: this.props.mode,
+            followList: []
         }
         this.handleMoreClick = this.handleMoreClick.bind(this)
         this.handleProfileClick = this.handleProfileClick.bind(this)
+        this.handleFollowChange = this.handleFollowChange.bind(this)
     }
     handleMoreClick() {
         // 投稿をさらに読み込む
@@ -27,6 +29,7 @@ class GetEntry extends React.Component {
             params.append('last_id', lastId)
             axios.post(accessFile, params)
             .then((response) => {
+                console.log(response.data)
                 this.setState({
                     entries: this.state.entries.concat(response.data.entries_data),
                     lastId: response.data.last_id
@@ -39,6 +42,35 @@ class GetEntry extends React.Component {
     handleProfileClick(value) {
         // profileのリフトアップ
         this.props.onProfileClick(value)
+    }
+    handleFollowChange(value) {
+        let exists = false
+        for(let i = 0; i < this.state.followList.length; i++) {
+            if(this.state.followList[i] === value) {
+                exists = true
+                break
+            }
+        }
+        // valueがfollowListになければ加え、あれば削除する
+        if(exists === false) {
+            const newFollowList = Array.from(this.state.followList)
+            newFollowList.push(value)
+            this.setState({
+                followList: newFollowList
+            })
+        } else {
+            const newFollowList = []
+            for(let i = 0; i < this.state.followList.length; i++) {
+                if(this.state.followList[i] !== value) {
+                    newFollowList.push(this.state.followList[i])
+                } else {
+                    continue
+                }
+            }
+            this.setState({
+                followList: newFollowList
+            })
+        }
     }
     componentDidMount() {
         // モードチェンジ
@@ -57,6 +89,16 @@ class GetEntry extends React.Component {
         }).catch((error) => {
             console.log(error)
         })
+        // follow情報の取得
+        axios.post('./get_follow_list.php')
+        .then((response) => {
+            console.log(response.data)
+            this.setState({
+                followList: response.data.follow_list
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
     }
     componentDidUpdate() {
         // モードが違っていれば通信する
@@ -69,6 +111,7 @@ class GetEntry extends React.Component {
             }
             axios.post(accessFile)
             .then((response) => {
+                console.log(response.data)
                 this.setState({
                     entries: response.data.entries_data,
                     mode: this.props.mode,
@@ -80,18 +123,31 @@ class GetEntry extends React.Component {
         }
     }
     render() {
+        console.log(this.state.followList)
         const entryList = this.state.entries.map((entry) => {
+            // フォローしているユーザーか判定、entry.followに情報を代入
+            let exists = false
+            for(let i = 0; i < this.state.followList.length; i++) {
+                if(entry.user_id === this.state.followList[i]) {
+                    exists = true
+                }
+            }
+            if(exists) {
+                entry.follow = true
+            } else {
+                entry.follow = false
+            }
             if("image_filenames" in entry) {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock onProfileClick={ this.handleProfileClick } userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
+                        <GetEntryUserBlock onProfileClick={ this.handleProfileClick } onFollowChange={ this.handleFollowChange } userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} follow={entry.follow} />
                         <GetEntryTextBlock entryId={entry.id} body={entry.body} createdAt={entry.created_at} imageFilenames={entry.image_filenames} />
                     </div>
                 )
             } else {
                 return (
                     <div className="get-entry-block" key={entry.id}>
-                        <GetEntryUserBlock onProfileClick={ this.handleProfileClick } userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} />
+                        <GetEntryUserBlock onProfileClick={ this.handleProfileClick } onFollowChange={ this.handleFollowChange } userId={entry.user_id} userName={entry.user_name} iconFilename={entry.icon_filename} follow={entry.follow} />
                         <GetEntryTextBlock entryId={entry.id} body={entry.body} createdAt={entry.created_at} />
                     </div>
                 )

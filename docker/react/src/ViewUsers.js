@@ -46,7 +46,7 @@ class ViewUsers extends React.Component {
     render() {
         const userList = this.state.userList.map((user) => {
             return (
-                <UserElement onProfileClick={ this.handleProfileClick } key={user.id} userId={user.id} userName={user.name} iconFilename={user.icon_filename}/>
+                <UserElement onProfileClick={ this.handleProfileClick } key={user.id} userId={user.id} userName={user.name} iconFilename={user.icon_filename} follow={user.follow}/>
             )
         })
         return (
