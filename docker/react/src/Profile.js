@@ -64,6 +64,16 @@ class Profile extends React.Component {
         }
     }
     render() {
+        let button
+        if(this.state.userData.login_user === true) {
+            button = <h1 className="name">You</h1>
+        } else {
+            if(this.state.follow) {
+                button = <button className="follow" onClick={this.handleFollowClick}>Bye</button>
+            } else {
+                button = <button className="follow" onClick={this.handleFollowClick}>Follow</button>
+            }
+        }
         return (
             <div className="profile">
                 <div className="profile-header">
@@ -76,12 +86,7 @@ class Profile extends React.Component {
                     }
                         <h1 className="name">{this.state.userData.name}</h1>
                     </span>
-                    {this.state.follow &&
-                        <button className="follow" onClick={this.handleFollowClick}>Bye</button>
-                    }
-                    {!this.state.follow &&
-                        <button className="follow" onClick={this.handleFollowClick}>Follow</button>
-                    }
+                    {button}
                 </div>
                 <div className="information">
                     <span className="info-element">Name: {this.state.userData.name}</span>

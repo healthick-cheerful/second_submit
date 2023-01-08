@@ -27,6 +27,11 @@ if(isset($_POST['user_id'])) {
         echo $e;
     }
 
+    if(intval($_SESSION['login_user_id']) === intval($_POST['user_id'])) {
+        $result_array['user_data']['login_user'] = true;
+    } else {
+        $result_array['user_data']['login_user'] = false;
+    }
     $result_array['user_data']['name'] = $select_result['name'];
     $result_array['user_data']['email'] = $select_result['email'];
     $result_array['user_data']['icon_filename'] = $select_result['icon_filename'];
