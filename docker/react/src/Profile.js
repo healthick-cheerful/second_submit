@@ -13,6 +13,8 @@ class Profile extends React.Component {
             follow: false
         }
         this.handleFollowClick = this.handleFollowClick.bind(this)
+        this.handleTextChange = this.handleTextChange.bind(this)
+        this.handleButtonClick = this.handleButtonClick.bind(this)
     }
     handleFollowClick() {
         // フォローまたはその解除
@@ -29,6 +31,43 @@ class Profile extends React.Component {
             console.log(error)
         })
     }
+    handleTextChange(event) {
+        const target = event.target
+        const value = target.value
+        const name = target.name
+        this.setState({
+            [name]: value
+        })
+    }
+    handleButtonClick(event) {
+        const target = event.target
+        const id = target.id
+        let kind;
+        let value;
+        if(id === 'change-name') {
+            kind = 'name'
+            value = this.state.name
+        } else if(id === 'change-email') {
+            kind = 'email'
+            value = this.state.email
+        } else if(id === 'change-password') {
+            kind = 'password'
+            value = this.state.password
+        } else if(id === 'change-icon') {
+            kind = 'icon'
+        }
+        if(kind === 'icon') {
+            console.log('image upload')
+        } else {
+            const settingParams = new URLSearchParams
+            settingParams.append('kind', kind)
+            settingParams.append('value', value)
+            axios.post('./user_settings.php', settingParams)
+            .then((response) => {
+                console.log(response.data)
+            })
+        }
+    }
     componentDidMount() {
         const profileParams = new URLSearchParams
         profileParams.append('user_id', this.props.userId)
@@ -36,7 +75,9 @@ class Profile extends React.Component {
         .then((response) => {
             this.setState({
                 userId: this.props.userId,
-                userData: response.data.user_data
+                userData: response.data.user_data,
+                name: response.data.user_data.name,
+                email: response.data.user_data.email
             })
         })
 
@@ -81,9 +122,9 @@ class Profile extends React.Component {
         if(this.state.userData.login_user === true) {
             info = <div className="user-setting">
                 <span className="form-block"><span className="element-set">Icon: <input id="iconInput" type="file" accept="image/*"></input><label className="icon" htmlFor="iconInput"><img className="images-icon" src={ imagesIcon } alt="add-images" /></label></span><button className="change">Change</button></span>
-                <span className="form-block"><span className="element-set">Name: <input value={this.state.userData.name}></input></span><button className="change">Change</button></span>
-                <span className="form-block"><span className="element-set">Email: <input value={this.state.userData.email}></input></span><button className="change">Change</button></span>
-                <span className="form-block"><span className="element-set">Password: <input type="password"></input></span><button className="change">Change</button></span>
+                <span className="form-block"><span className="element-set">Name: <input name="name" value={this.state.name} onChange={ this.handleTextChange }></input></span><button id="change-name" className="change" onClick={ this.handleButtonClick }>Change</button></span>
+                <span className="form-block"><span className="element-set">Email: <input name="email" value={this.state.email} onChange={ this.handleTextChange }></input></span><button id="change-email" className="change" onClick={ this.handleButtonClick }>Change</button></span>
+                <span className="form-block"><span className="element-set">Password: <input name="password" value={this.state.password} type="password" onChange={ this.handleTextChange }></input></span><button id="change-password" className="change" onClick={ this.handleButtonClick }>Change</button></span>
             </div>
         } else  {
             info = <div className="information">
