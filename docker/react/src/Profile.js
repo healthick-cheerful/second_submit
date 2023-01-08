@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 import "./css/Profile.css"
 import defaultIcon from "./assets/400x400.png"
+import imagesIcon from "./assets/images.svg"
 
 class Profile extends React.Component {
     constructor(props) {
@@ -64,6 +65,7 @@ class Profile extends React.Component {
         }
     }
     render() {
+        // button表示のための分岐
         let button
         if(this.state.userData.login_user === true) {
             button = <h1 className="name">You</h1>
@@ -73,6 +75,21 @@ class Profile extends React.Component {
             } else {
                 button = <button className="follow" onClick={this.handleFollowClick}>Follow</button>
             }
+        }
+        // 設定機能表示のための分岐
+        let info
+        if(this.state.userData.login_user === true) {
+            info = <div className="user-setting">
+                <span className="form-block"><span className="element-set">Icon: <input id="iconInput" type="file" accept="image/*"></input><label className="icon" htmlFor="iconInput"><img className="images-icon" src={ imagesIcon } alt="add-images" /></label></span><button className="change">Change</button></span>
+                <span className="form-block"><span className="element-set">Name: <input value={this.state.userData.name}></input></span><button className="change">Change</button></span>
+                <span className="form-block"><span className="element-set">Email: <input value={this.state.userData.email}></input></span><button className="change">Change</button></span>
+                <span className="form-block"><span className="element-set">Password: <input type="password"></input></span><button className="change">Change</button></span>
+            </div>
+        } else  {
+            info = <div className="information">
+                <span className="info-element">Name: {this.state.userData.name}</span>
+                <span className="info-element">Email: {this.state.userData.email}</span>
+            </div>
         }
         return (
             <div className="profile">
@@ -88,10 +105,7 @@ class Profile extends React.Component {
                     </span>
                     {button}
                 </div>
-                <div className="information">
-                    <span className="info-element">Name: {this.state.userData.name}</span>
-                    <span className="info-element">Email: {this.state.userData.email}</span>
-                </div>
+                {info}
             </div>
         )
     }
