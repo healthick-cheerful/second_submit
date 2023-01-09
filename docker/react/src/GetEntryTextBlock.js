@@ -16,7 +16,6 @@ class GetEntryTextBlock extends React.Component {
         params.append('entry_id', this.props.entryId)
         axios.post('./bookmark.php', params)
         .then((response) => {
-            console.log(response.data)
             if('bookmark' in response.data) {
                 this.props.onBookmarkChange(this.props.entryId)
             }
@@ -26,7 +25,6 @@ class GetEntryTextBlock extends React.Component {
         })
     }
     componentDidUpdate() {
-        console.log(this.props.bookmark)
         if(this.props.bookmark !== this.state.bookmark) {
             this.setState({
                 bookmark: this.props.bookmark

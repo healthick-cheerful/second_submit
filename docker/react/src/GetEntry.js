@@ -160,7 +160,6 @@ class GetEntry extends React.Component {
         }
     }
     render() {
-        console.log(this.state.bookmarkList)
         const entryList = this.state.entries.map((entry) => {
             // フォローしているユーザーか判定、entry.followに情報を代入
             let exists = false
