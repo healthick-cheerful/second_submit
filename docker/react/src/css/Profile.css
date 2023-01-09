@@ -17,6 +17,7 @@ div.profile {
 }
 .profile img.user-icon {
     width: 10rem;
+    height: 10rem;
     border-radius: 50%;
 }
 .profile h1.name {
@@ -60,6 +61,10 @@ div.profile {
     width: 0;
     height: 0;
     opacity: 0;
+}
+
+.profile canvas.image-canvas {
+    display: none;
 }
 
 .profile img.images-icon {

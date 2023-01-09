@@ -15,6 +15,9 @@ class Profile extends React.Component {
         this.handleFollowClick = this.handleFollowClick.bind(this)
         this.handleTextChange = this.handleTextChange.bind(this)
         this.handleButtonClick = this.handleButtonClick.bind(this)
+        this.handleImageInputChange = this.handleImageInputChange.bind(this)
+
+        this.canvasRef = React.createRef()
     }
     handleFollowClick() {
         // フォローまたはその解除
@@ -39,6 +42,39 @@ class Profile extends React.Component {
             [name]: value
         })
     }
+    handleImageInputChange(event) {
+        const target = event.target
+        const files = target.files
+        let base64Image
+        const canvas = this.canvasRef.current
+        const reader = new FileReader()
+        const image = new Image()
+        reader.onload = () => {
+            image.onload = () => {
+                const originalWidth = image.naturalWidth
+                const originalHeight = image.naturalHeight
+                const maxLength = 800
+                if(originalWidth <= maxLength && originalWidth <= maxLength) {
+                    canvas.width = originalWidth
+                    canvas.height = originalHeight
+                } else if(originalWidth >= originalHeight) {
+                    canvas.width = maxLength
+                    canvas.height = maxLength * originalHeight / originalWidth
+                } else {
+                    canvas.width = maxLength * originalWidth / originalHeight
+                    canvas.height = maxLength
+                }
+                const context = canvas.getContext("2d")
+                context.drawImage(image, 0, 0, canvas.width, canvas.height)
+                base64Image = canvas.toDataURL()
+                this.setState({
+                    icon: base64Image
+                })
+            }
+            image.src = reader.result
+        }
+        reader.readAsDataURL(files.item(0))
+    }
     handleButtonClick(event) {
         const target = event.target
         const id = target.id
@@ -55,9 +91,16 @@ class Profile extends React.Component {
             value = this.state.password
         } else if(id === 'change-icon') {
             kind = 'icon'
+            value = this.state.icon
         }
         if(kind === 'icon') {
-            console.log('image upload')
+            console.log(value)
+            const settingParams = new URLSearchParams
+            settingParams.append('icon', value)
+            axios.post('./icon_setting.php', settingParams)
+            .then((response) => {
+                console.log(response.data)
+            })
         } else {
             const settingParams = new URLSearchParams
             settingParams.append('kind', kind)
@@ -106,6 +149,7 @@ class Profile extends React.Component {
         }
     }
     render() {
+        const iconPath = './image/' + this.state.userData.icon_filename
         // button表示のための分岐
         let button
         if(this.state.userData.login_user === true) {
@@ -121,7 +165,8 @@ class Profile extends React.Component {
         let info
         if(this.state.userData.login_user === true) {
             info = <div className="user-setting">
-                <span className="form-block"><span className="element-set">Icon: <input id="iconInput" type="file" accept="image/*"></input><label className="icon" htmlFor="iconInput"><img className="images-icon" src={ imagesIcon } alt="add-images" /></label></span><button className="change">Change</button></span>
+                <canvas className="image-canvas" ref={ this.canvasRef }></canvas>
+                <span className="form-block"><span className="element-set">Icon: <input id="iconInput" type="file" accept="image/*" onChange={ this.handleImageInputChange }></input><label className="icon" htmlFor="iconInput"><img className="images-icon" src={ imagesIcon } alt="add-images" /></label></span><button id="change-icon" className="change" onClick={ this.handleButtonClick }>Change</button></span>
                 <span className="form-block"><span className="element-set">Name: <input name="name" value={this.state.name} onChange={ this.handleTextChange }></input></span><button id="change-name" className="change" onClick={ this.handleButtonClick }>Change</button></span>
                 <span className="form-block"><span className="element-set">Email: <input name="email" value={this.state.email} onChange={ this.handleTextChange }></input></span><button id="change-email" className="change" onClick={ this.handleButtonClick }>Change</button></span>
                 <span className="form-block"><span className="element-set">Password: <input name="password" value={this.state.password} type="password" onChange={ this.handleTextChange }></input></span><button id="change-password" className="change" onClick={ this.handleButtonClick }>Change</button></span>
@@ -137,7 +182,7 @@ class Profile extends React.Component {
                 <div className="profile-header">
                     <span className="icon-and-name">
                     {this.state.userData.icon_filename !== null &&
-                        <img className="user-icon" src={this.state.userData.icon_filename} />
+                        <img className="user-icon" src={iconPath} />
                     }
                     {this.state.userData.icon_filename === null  &&
                         <img className="user-icon" src={defaultIcon} />
