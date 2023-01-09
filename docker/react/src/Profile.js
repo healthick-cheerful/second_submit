@@ -94,12 +94,10 @@ class Profile extends React.Component {
             value = this.state.icon
         }
         if(kind === 'icon') {
-            console.log(value)
             const settingParams = new URLSearchParams
             settingParams.append('icon', value)
             axios.post('./icon_setting.php', settingParams)
             .then((response) => {
-                console.log(response.data)
             })
         } else {
             const settingParams = new URLSearchParams
@@ -107,7 +105,6 @@ class Profile extends React.Component {
             settingParams.append('value', value)
             axios.post('./user_settings.php', settingParams)
             .then((response) => {
-                console.log(response.data)
             })
         }
     }

@@ -33,10 +33,22 @@ class UserElement extends React.Component {
         this.props.onProfileClick(userId)
     }
     componentDidMount() {
+        if(this.props.iconFilename !== null && this.state.existsIcon === false) {
+            this.setState({
+                existsIcon: true
+            })
+        }
         // followの状態をセット
         this.setState({
             follow: this.props.follow
         })
+    }
+    componentDidUpdate() {
+        if(this.props.iconFilename !== null && this.state.existsIcon === false) {
+            this.setState({
+                existsIcon: true
+            })
+        }
     }
     render() {
         return (
@@ -47,7 +59,7 @@ class UserElement extends React.Component {
                     <img className="icon" src={defaultIcon} />
                 }
                 {this.state.existsIcon &&
-                    <img className="icon" src={this.props.iconFilename} />
+                    <img className="icon" src={"./image/" + this.props.iconFilename} />
                 }
                     <h2 className="user-name">{ this.props.userName }</h2>
                 </label>
