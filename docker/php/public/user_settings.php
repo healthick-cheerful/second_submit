@@ -8,7 +8,7 @@ $result_array = [
     "server_error" => false
 ];
 
-if(!empty($_POST['kind']) && !empty($_POST['value'])) {
+if(isset($_SESSION['login_user_id']) && !empty($_POST['kind']) && !empty($_POST['value'])) {
     $update_sql = 'UPDATE users SET ';
     if($_POST['kind'] === 'name') {
         $update_element = 'name = :value';
