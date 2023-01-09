@@ -43,7 +43,6 @@ if(isset($_SESSION['login_user_id']) && isset($_POST['user_id'])) {
             }
         } catch(\Throwable $e) {
             $result_array["server_error"] = true;
-            echo $e;
         }
     }
 
