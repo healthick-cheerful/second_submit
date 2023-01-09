@@ -30,6 +30,18 @@ class GetEntryUserBlock extends React.Component {
         // profileのリフトアップ
         this.props.onProfileClick(this.props.userId)
     }
+    componentDidMount() {
+        if(this.props.follow !== this.state.follow) {
+            this.setState({
+                follow: this.props.follow
+            })
+        }
+        if(this.props.iconFilename !== null && this.state.iconNotNull === false) {
+            this.setState({
+                iconNotNull: true
+            })
+        }
+    }
     componentDidUpdate() {
         if(this.props.follow !== this.state.follow) {
             this.setState({
