@@ -36,6 +36,11 @@ class GetEntryUserBlock extends React.Component {
                 follow: this.props.follow
             })
         }
+        if(this.props.iconFilename !== null && this.state.iconNotNull === false) {
+            this.setState({
+                iconNotNull: true
+            })
+        }
     }
     render() {
 // icon表示機能追加予定
@@ -44,7 +49,7 @@ class GetEntryUserBlock extends React.Component {
                 <label>
                     <button className="hidden" onClick={ this.handleProfileClick }></button>
                 {this.state.iconNotNull &&
-                    <img src={ this.state.entryIcon }></img>
+                    <img src={ "./image/" + this.props.iconFilename }></img>
                 }
                 {!this.state.iconNotNull &&
                     <img src={defaultIcon} />

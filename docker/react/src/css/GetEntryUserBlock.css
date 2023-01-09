@@ -18,7 +18,8 @@ div.get-entry-user-block {
     opacity: 0;
 }
 .get-entry-user-block img {
-    width: 90%;
+    width: 3rem;
+    height: 3rem;
     margin: 1rem auto 0;
     border-radius: 50%;
 }
